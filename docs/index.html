@@ -33,11 +33,11 @@
 <body>
 
   <script>
-    // URLパラメータ key がない場合は強制ログイン
+    // URLパラメータ key がない場合は403ページへ強制移動
     const params = new URLSearchParams(location.search);
     const key = params.get("key");
     if (!key) {
-      location.href = "deliver.html";
+      location.href = "403.html";
     }
   </script>
 
@@ -56,26 +56,3 @@
   <h2>銀トーク動画（1日目〜4日目）</h2>
   <a href="gintalk/day1.mp4" download>1日目 ダウンロード</a><br>
   <video src="gintalk/day1.mp4" controls width="640"></video><br><br>
-
-  <a href="gintalk/day2.mp4" download>2日目 ダウンロード</a><br>
-  <video src="gintalk/day2.mp4" controls width="640"></video><br><br>
-
-  <a href="gintalk/day3.mp4" download>3日目 ダウンロード</a><br>
-  <video src="gintalk/day3.mp4" controls width="640"></video><br><br>
-
-  <a href="gintalk/day4.mp4" download>4日目 ダウンロード</a><br>
-  <video src="gintalk/day4.mp4" controls width="640"></video>
-
-  <h2>三送会・三年生発表</h2>
-  <a href="sansoukai/sansoukai.mp4" download>ダウンロード</a><br>
-  <video src="sansoukai/sansoukai.mp4" controls width="640"></video>
-
-  <h2>もろもろ・その他</h2>
-  <a href="others/other1.mp4" download>その他① ダウンロード</a><br>
-  <video src="others/other1.mp4" controls width="640"></video><br><br>
-
-  <a href="others/other2.mp4" download>その他② ダウンロード</a><br>
-  <video src="others/other2.mp4" controls width="640"></video>
-
-</body>
-</html>
