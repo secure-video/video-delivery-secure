@@ -36,16 +36,16 @@
   <button onclick="login()">ログイン</button>
 
   <script>
+    const CORRECT_PASSWORD = "ここに嶺が決めたパスワード";
+
     function login() {
       const pw = document.getElementById("pw").value;
-      if (!pw) {
-        alert("パスワードを入力してください");
-        return;
+      if (pw === CORRECT_PASSWORD) {
+        // ログイン成功 → index.html へ
+        location.href = "index.html";
+      } else {
+        alert("パスワードが違います");
       }
-      // ブラウザの一時領域に鍵を保存
-      sessionStorage.setItem("videoKey", pw);
-      // メインページへ
-      location.href = "index.html";
     }
   </script>
 </body>
