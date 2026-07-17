@@ -33,10 +33,9 @@
 <body>
 
   <script>
-    // 直リンク対策：リファラチェック（簡易版）
-    // deliver.html から来ていない場合はログインページへ戻す
-    if (document.referrer.indexOf("deliver.html") === -1) {
-      location.href = "deliver.html";
+    // ★ 強制ログイン（sessionStorage に login がない場合は403へ）
+    if (sessionStorage.getItem("login") !== "ok") {
+      location.href = "403.html";
     }
   </script>
 
