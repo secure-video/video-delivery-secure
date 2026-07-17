@@ -29,16 +29,48 @@
       font-size: 1.05em;
     }
   </style>
+  <!-- CryptoJS をローカルに置いて読み込む（crypto-js.js） -->
+  <script src="crypto-js.js"></script>
+  <!-- 暗号化済みパス一覧 -->
+  <script src="encryptedPaths.js"></script>
 </head>
 <body>
 
   <script>
-    // URLパラメータ key がない場合は403ページへ強制移動
-    const params = new URLSearchParams(location.search);
-    const key = params.get("key");
+    // ログインしていない（鍵がない）場合は403へ
+    const key = sessionStorage.getItem("videoKey");
     if (!key) {
       location.href = "403.html";
     }
+
+    // 復号関数
+    function decryptPath(cipherText) {
+      const bytes = CryptoJS.AES.decrypt(cipherText, key);
+      return bytes.toString(CryptoJS.enc.Utf8);
+    }
+
+    // 復号して video の src にセット
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("gingasaiVideo").src =
+        decryptPath(encryptedPaths.gingasai);
+
+      document.getElementById("gintalkDay1Video").src =
+        decryptPath(encryptedPaths.gintalk_day1);
+      document.getElementById("gintalkDay2Video").src =
+        decryptPath(encryptedPaths.gintalk_day2);
+      document.getElementById("gintalkDay3Video").src =
+        decryptPath(encryptedPaths.gintalk_day3);
+      document.getElementById("gintalkDay4Video").src =
+        decryptPath(encryptedPaths.gintalk_day4);
+
+      document.getElementById("sansoukaiVideo").src =
+        decryptPath(encryptedPaths.sansoukai);
+
+      document.getElementById("others1Video").src =
+        decryptPath(encryptedPaths.others1);
+      document.getElementById("others2Video").src =
+        decryptPath(encryptedPaths.others2);
+    });
   </script>
 
   <h1>参考動画一覧</h1>
@@ -50,9 +82,20 @@
   </div>
 
   <h2>銀河祭完成動画</h2>
-  <a href="gingasai/gingasai.mp4" download>ダウンロード</a><br>
-  <video src="gingasai/gingasai.mp4" controls width="640"></video>
+  <video id="gingasaiVideo" controls width="640"></video>
 
   <h2>銀トーク動画（1日目〜4日目）</h2>
-  <a href="gintalk/day1.mp4" download>1日目 ダウンロード</a><br>
-  <video src="gintalk/day1.mp4" controls width="640"></video><br><br>
+  <video id="gintalkDay1Video" controls width="640"></video><br><br>
+  <video id="gintalkDay2Video" controls width="640"></video><br><br>
+  <video id="gintalkDay3Video" controls width="640"></video><br><br>
+  <video id="gintalkDay4Video" controls width="640"></video>
+
+  <h2>三送会・三年生発表</h2>
+  <video id="sansoukaiVideo" controls width="640"></video>
+
+  <h2>もろもろ・その他</h2>
+  <video id="others1Video" controls width="640"></video><br><br>
+  <video id="others2Video" controls width="640"></video>
+
+</body>
+</html>
