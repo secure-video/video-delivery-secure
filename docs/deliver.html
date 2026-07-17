@@ -1,1 +1,37 @@
-11
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>動画納品ログイン</title>
+</head>
+<body>
+  <h2>パスワード入力</h2>
+  <input id="pw" type="password" placeholder="パスワード">
+  <button onclick="check()">開く</button>
+
+  <script>
+    async function sha256(text) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
+    }
+
+    async function check() {
+      const input = document.getElementById("pw").value;
+      const hash = await sha256(input);
+
+      // ここに「SHA256サイトで計算したハッシュ」を貼る
+      const correctHash = "ここに長いハッシュ文字列";
+
+      if (hash === correctHash) {
+        location.href = "index.html";
+      } else {
+        alert("パスワードが違います");
+      }
+    }
+  </script>
+</body>
+</html>
