@@ -32,12 +32,12 @@
 </head>
 <body>
 
-  <script>
-    // ★ 強制ログイン（sessionStorage に login がない場合は403へ）
-    if (sessionStorage.getItem("login") !== "ok") {
-      location.href = "403.html";
-    }
-  </script>
+<script>
+  if (sessionStorage.getItem("login") !== "ok") {
+    location.href = "403.html";
+  }
+</script>
+
 
   <h1>参考動画一覧</h1>
 
